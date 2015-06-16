@@ -1,0 +1,38 @@
+.blog-post {
+	max-width:800px;
+	margin: 20px auto;
+	background: #FFF;
+	padding: 0;
+	line-height: 0;
+	position: relative;
+	color: black;
+}
+.fullwidth .col{
+	width: 100%;
+}
+.col {
+	width: 50%; float:left;
+}
+.col img,.col video,.col audio {
+	width: 100%; height: auto;
+}
+audio {
+	float:left;
+}
+.col h1{
+	color:#000000;
+}
+.content{
+	padding:1rem;
+	line-height:1rem;
+}
+.clearfix {
+	clear: both;
+	float: none;
+}
+@media all and (max-width:30em) {
+	.col { 
+		width: 100%;
+		float:none;
+	}
+}

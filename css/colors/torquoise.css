@@ -1,0 +1,65 @@
+/*######################################*/
+/*Colors for the template */
+/*######################################*/
+
+h1 span,
+h2 span,
+.iconbox i,
+.contact-detail i,
+.description i,
+.submit.color,
+.ce-days.color,
+.ce-hours.color,
+.ce-minutes.color,
+.ce-seconds.color,
+.ce-dseconds.color,
+.ce-mseconds.color,
+.blogpost h4 a{
+	color:#0BC560
+}
+.description p.jump:hover span,
+.social-icon.color:after,
+.submit.color,
+input.color,
+textarea.color{
+	border-color:#0BC560
+}
+.submit.color:after,
+.submit.color:hover,
+.contact-detail i.color{
+	color:#fff
+}
+.iconbox.color i{
+	color:#fff;
+	border-radius:100%;
+	width: 75px;
+	height: 75px;
+	text-align: center;
+}
+.team .entry-team,
+.social-icon.color i,
+.contact-detail i.color,
+.iconbox.color i,
+.submit.color:after{
+	background-color:#0BC560
+}
+@-webkit-keyframes glow {
+    0% {border-color: #1cff82;box-shadow: 0 0 5px rgba(11, 197, 96,.2), inset 0 0 5px rgba(11, 197, 96,.1)}	
+    100% {border-color: #0BC560;box-shadow: 0 0 20px rgba(11, 197, 96,.6), inset 0 0 10px rgba(11, 197, 96,.4)}
+}
+@-moz-keyframes glow {
+    0% {border-color: #1cff82;box-shadow: 0 0 5px rgba(11, 197, 96,.2), inset 0 0 5px rgba(11, 197, 96,.1)}	
+    100% {border-color: #0BC560;box-shadow: 0 0 20px rgba(11, 197, 96,.6), inset 0 0 10px rgba(11, 197, 96,.4)}
+}
+@-o-keyframes glow {
+    0% {border-color: #1cff82;box-shadow: 0 0 5px rgba(11, 197, 96,.2), inset 0 0 5px rgba(11, 197, 96,.1)}	
+    100% {border-color: #0BC560;box-shadow: 0 0 20px rgba(11, 197, 96,.6), inset 0 0 10px rgba(11, 197, 96,.4)}
+}
+@-ms-keyframes glow {
+    0% {border-color: #1cff82;box-shadow: 0 0 5px rgba(11, 197, 96,.2), inset 0 0 5px rgba(11, 197, 96,.1)}	
+    100% {border-color: #0BC560;box-shadow: 0 0 20px rgba(11, 197, 96,.6), inset 0 0 10px rgba(11, 197, 96,.4)}
+}
+@keyframes glow {
+    0% {border-color: #1cff82;box-shadow: 0 0 5px rgba(11, 197, 96,.2), inset 0 0 5px rgba(11, 197, 96,.1)}	
+    100% {border-color: #0BC560;box-shadow: 0 0 20px rgba(11, 197, 96,.6), inset 0 0 10px rgba(11, 197, 96,.4)}
+}

@@ -1,0 +1,193 @@
+/*======================== Desktop and Loptop and Other Tablet 768<px========================*/
+@media (min-width: 768px) {
+	#textslider {
+		margin:1rem 0;
+	}
+}
+/*======================== Tablet 768>px ========================*/
+@media (max-width: 768px) {
+	html {
+        font-size: 100%;
+    }
+}
+/*======================== Phone 640>px ========================*/
+@media (max-width: 640px) {
+	html {
+        font-size: 90%;
+    }
+	p{
+		font-size: 90%;
+	}
+	h1,h2,h3,h4,h5 {
+		font-size: 200%;
+	}
+	#textslider {
+		height: 160px !important;
+	}
+	#textslider h1 {
+		font-size: 4rem;
+	}
+	.two-column,
+	.two-column:first-child{
+		margin: 0;
+		width: 100%;
+	}
+	.three-column,
+	.three-column:last-child{
+		margin: 10px 0;
+		width: 100%;
+	}
+	.four-column{
+		border-right: 0px;
+		width: 100%;
+		border-bottom: 1px solid rgba(255,255,255,0.5)
+	}
+	.four-column:last-child{
+		border-bottom:none
+	}
+	.nav.bottom{
+		top:0;bottom:none;
+	}
+	.countdown{
+		margin-bottom:0;
+		padding-bottom:0;
+	}
+}
+/*======================== Phone 480>px ========================*/
+@media (max-width: 480px) {
+	html {
+        font-size: 90%;
+    }
+	p{
+		font-size: 90%;
+	}
+	h1,h2,h3,h4,h5 {
+		font-size: 200%;
+	}
+	#textslider {
+		height: 120px !important;
+	}
+	#textslider h1 {
+		font-size: 4rem;
+	}
+	.two-column,
+	.two-column:first-child{
+		margin: 0;
+		width: 100%;
+	}
+	.three-column,
+	.three-column:last-child{
+		margin: 10px 0;
+		width: 100%;
+	}
+	.four-column{
+		border-right: 0px;
+		width: 100%;
+		border-bottom: 1px solid rgba(255,255,255,0.5)
+	}
+	.four-column:last-child{
+		border-bottom:none
+	}
+	.nav.bottom{
+		top:0;bottom:none;
+	}
+	.countdown{
+		margin-bottom:0;
+		padding-bottom:0;
+	}
+}
+/*======================== Phone 360>px ========================*/
+@media (max-width: 360px) {
+	html {
+        font-size: 90%;
+    }
+	p{
+		font-size: 90%;
+	}
+	h1,h2,h3,h4,h5 {
+		font-size: 190%;
+	}
+	#textslider {
+		height: 250px !important;
+	}
+	#textslider h1 {
+		font-size: 4rem;
+	}
+	#about .two-column:first-child,
+	#about .two-column,
+	.two-column,
+	.two-column:first-child{
+		margin: 0;
+		padding: 0;
+		width: 100%;
+	}
+	.three-column,
+	.three-column:last-child{
+		margin: 10px 0;
+		width: 100%;
+	}
+	.four-column{
+		border-right: 0px;
+		width: 100%;
+		border-bottom: 1px solid rgba(255,255,255,0.5)
+	}
+	.four-column:last-child{
+		border-bottom:none
+	}
+	.nav.bottom{
+		top:0;bottom:none;
+	}
+	.countdown{
+		margin-bottom:0;
+		padding-bottom:0;
+	}
+}
+/*======================== Phone 320>px ========================*/
+@media (max-width: 320px) {
+	html {
+        font-size: 90%;
+    }
+	p{
+		font-size: 90%;
+	}
+	h1,h2,h3,h4,h5 {
+		font-size: 190%;
+	}
+	#center{
+		display:block;
+	}
+	#textslider {
+		height: 250px !important;
+	}
+	#textslider h1 {
+		font-size: 4rem;
+	}
+	#about .two-column:first-child,
+	#about .two-column,
+	.two-column,
+	.two-column:first-child{
+		margin: 0;
+		padding: 0;
+		width: 100%;
+	}
+	.three-column,
+	.three-column:last-child{
+		margin: 10px 0;
+		width: 100%;
+	}
+	.four-column{
+		border-right: 0px;
+		width: 100%;
+		border-bottom: 1px solid rgba(255,255,255,0.5)
+	}
+	.four-column:last-child{
+		border-bottom:none
+	}
+	.nav.bottom{
+		top:0;bottom:none;
+	}
+	.countdown{
+		margin-bottom:0;
+		padding-bottom:0;
+	}
+}
