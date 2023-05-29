@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>How I cleaned a ton of if statements from my Angular app</title>
+  <meta name='description' content='The personal blog of Ionel Lupu, auth of Typetron, typetron.org'>
+
+  <link rel="canonical" href="http://localhost:6060/blog/clean-angular-app-from-ifs">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="How I cleaned a ton of if statements from my Angular app – Ionel Lupu">
+  <meta name="twitter:description" content="Maybe you don’t make the same mistakes like I do in Angular, but I wanted to share with you how I removed a lot of if statements from my code by simply using parameters in methods.
+">
+  <meta name="twitter:image:src" content="">
+
+  <!-- Facebook OpenGraph -->
+  <meta property="og:title" content="How I cleaned a ton of if statements from my Angular app – Ionel Lupu">
+  <meta property="og:description" content="Maybe you don’t make the same mistakes like I do in Angular, but I wanted to share with you how I removed a lot of if statements from my code by simply using parameters in methods.
+">
+  <meta property="og:image" content="">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+  <!-- Ionicons -->
+  <link href="https://unpkg.com/ionicons@4.5.0/dist/css/ionicons.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/assets/main.css">
+</head>
+
+<body>
+
+    
+
+    <!-- begin header -->
+<header class="c-header">
+  <div class="container">
+    <div class="row">
+      <div class="c-header__inner">
+
+        <div class="logo">
+          <a class="logo__link" href="/">
+          
+            Ionel Lupu
+          
+          </a>
+        </div>
+
+        <nav class="main-nav">
+          <div class="main-nav__box">
+
+            <div class="nav__icon-close">
+              <i class="ion ion-md-close"></i>
+            </div>
+
+            <div class="nav__title">Menu</div>
+
+              <ul class="nav__list list-reset">
+
+              
+                
+                <li class="nav__item">
+                  <a href="/" class="nav__link">Home</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/blog/" class="nav__link">Blog</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/about" class="nav__link">About</a>
+                </li>
+                
+              
+
+            </ul>
+          </div>
+
+          <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+          
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://twitter.com/ionelLupu_" target="_blank" rel="noopener" aria-label="twitter icon"><i class="ion ion-logo-twitter"></i></a>
+    </li>
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/IonelLupu" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+          <!--bookshop-live end-->
+        </nav>
+
+        <div class="nav-button">
+          <i class="nav__icon nav__icon-menu ion ion-md-menu"></i>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</header>
+<!-- end header -->
+
+
+    <div class="post-top">
+  <div class="container">
+    <div class="row">
+
+      
+
+      <div class="col col-6 col-d-12">
+        <div class="post__info">
+
+          
+          <div class="post-tags">
+            
+              <a href="/tag/typescript" class="post-tags__tag">Typescript</a>
+            
+              <a href="/tag/clean code" class="post-tags__tag">Clean Code</a>
+            
+          </div>
+          
+
+
+          <h1 class="post__title">How I cleaned a ton of if statements from my Angular app</h1>
+
+          <div class="post__meta">
+            <div class="post__author-image">
+              <img loading="lazy" src="/images/L1008018.jpeg" alt="Ionel Lupu">
+            </div>
+
+            <div class="post__meta-bottom">
+              <div class="post__author">Ionel Lupu</div>
+              <time class="post__date" datetime="2020-04-22T00:00:00+03:00">22 Apr 2020</time>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- begin post -->
+<div class="container animate">
+
+  <article class="post">
+
+    <div class="post__content">
+      <p>Maybe you don’t make the same mistakes like I do in Angular, but I wanted to share with you how I removed a lot of <code class="language-plaintext highlighter-rouge">if</code> statements from my code by simply using parameters in methods.</p>
+
+<p>Let’s imagine you have an <code class="language-plaintext highlighter-rouge">UserComponent</code> that shows the user’s name and there is a button to delete it:</p>
+<div class="language-ts highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Component</span><span class="p">,</span> <span class="nx">OnInit</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@angular/core</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kr">interface</span> <span class="nx">User</span> <span class="p">{</span>
+    <span class="nl">id</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span>
+    <span class="nl">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">@</span><span class="nd">Component</span><span class="p">({</span>
+    <span class="na">selector</span><span class="p">:</span> <span class="dl">'</span><span class="s1">app-user</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">template</span><span class="p">:</span> <span class="s2">`
+        &lt;p&gt;Welcome !&lt;/p&gt;
+        &lt;button (click)="removeUser()"&gt;Remove user&lt;/button&gt;
+    `</span>
+<span class="p">})</span>
+<span class="k">export</span> <span class="kd">class</span> <span class="nc">UserComponent</span> <span class="k">implements</span> <span class="nx">OnInit</span> <span class="p">{</span>
+
+    <span class="nl">user</span><span class="p">?:</span> <span class="nx">User</span><span class="p">;</span>
+
+    <span class="k">async</span> <span class="nf">ngOnInit</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">user</span> <span class="o">=</span> <span class="k">await</span> <span class="nf">fetchUser</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">async</span> <span class="nf">removeUser</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nf">if </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">user</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// this is what we will remove later</span>
+            <span class="k">await</span> <span class="nf">removeUser</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">id</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>This works fine (assuming we’ve implemented the <code class="language-plaintext highlighter-rouge">fethUser</code> and <code class="language-plaintext highlighter-rouge">removeUser</code> functions) even if we build for prod with <code class="language-plaintext highlighter-rouge">ng build --prod</code>.</p>
+
+<p>But when working with Typescript, you will hear everyone saying to enable strict mode to protect developers against common errors. You can do it inside the <code class="language-plaintext highlighter-rouge">tsconfig.json</code> file:</p>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"compilerOptions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"strict"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>The app still works, but if we are trying to build for production now, we will get the following error:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ERROR <span class="k">in </span>src/app/user/user.component.ts.UserComponent.html<span class="o">(</span>2,12<span class="o">)</span>: Object is possibly <span class="s1">'undefined'</span><span class="nb">.</span>
+</code></pre></div></div>
+
+<p>This is because Angular is trying to protect us against <code class="language-plaintext highlighter-rouge">undefined</code> values by checking our templates. In this case, the <code class="language-plaintext highlighter-rouge">user</code> variable has the type <code class="language-plaintext highlighter-rouge">User|undefined</code>. This is fine. We can fix this by using a condition in the template:</p>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nt">&lt;ng-container</span> <span class="na">*ngIf=</span><span class="s">"user"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;p&gt;</span>Welcome !<span class="nt">&lt;/p&gt;</span>
+        <span class="nt">&lt;button</span> <span class="na">(click)=</span><span class="s">"removeUser()"</span><span class="nt">&gt;</span>Remove user<span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;/ng-container&gt;</span>
+</code></pre></div></div>
+
+<p>This will fix all the errors, but we have two if conditions in our app and we are trying to get rid of most of them.</p>
+
+<p>Type checking in templates work the same as in typescript: types are narrowed if a condition is used. This means that the <code class="language-plaintext highlighter-rouge">user</code> variable inside the <code class="language-plaintext highlighter-rouge">ng-container</code> will only have the type <code class="language-plaintext highlighter-rouge">User</code> because the <code class="language-plaintext highlighter-rouge">undefined</code> type was stripped by the <code class="language-plaintext highlighter-rouge">*ngIf</code> directive.</p>
+
+<p>This means we can now pass the <code class="language-plaintext highlighter-rouge">user</code> as a parameter to the <code class="language-plaintext highlighter-rouge">removeUser</code> method and remove the if from there. This is the final component:</p>
+
+<div class="language-ts highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Component</span><span class="p">,</span> <span class="nx">OnInit</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@angular/core</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kr">interface</span> <span class="nx">User</span> <span class="p">{</span>
+    <span class="nl">id</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span>
+    <span class="nl">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">@</span><span class="nd">Component</span><span class="p">({</span>
+    <span class="na">selector</span><span class="p">:</span> <span class="dl">'</span><span class="s1">app-user</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">template</span><span class="p">:</span> <span class="s2">`
+        &lt;ng-container *ngIf="user"&gt;
+            &lt;p&gt;Welcome !&lt;/p&gt;
+            &lt;button (click)="removeUser(user)"&gt;Remove user&lt;/button&gt;
+        &lt;/ng-container&gt;
+    `</span>
+<span class="p">})</span>
+<span class="k">export</span> <span class="kd">class</span> <span class="nc">UserComponent</span> <span class="k">implements</span> <span class="nx">OnInit</span> <span class="p">{</span>
+
+    <span class="nl">user</span><span class="p">?:</span> <span class="nx">User</span><span class="p">;</span>
+
+    <span class="k">async</span> <span class="nf">ngOnInit</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">user</span> <span class="o">=</span> <span class="k">await</span> <span class="nf">fetchUser</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">async</span> <span class="nf">removeUser</span><span class="p">(</span><span class="nx">user</span><span class="p">:</span> <span class="nx">User</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">await</span> <span class="nf">removeUser</span><span class="p">(</span><span class="nx">user</span><span class="p">.</span><span class="nx">id</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Do you have any other sweet tips like this one? Share them in comments! 😁</p>
+
+<p><em>Follow me on <a href="https://twitter.com/IonelCLupu">Twitter</a> for more awesome stuff like this.</em>
+<em>Check <a href="http://typetron.org/">Typetron</a>, the Node.js framework I am working on.</em></p>
+
+    </div>
+
+    <div class="post__share">
+  <div class="share__head">
+    <div class="share__title">Share this Post</div>
+  </div>
+  <ul class="share__list list-reset">
+    <li class="share__item">
+      <a class="share__link share__twitter"
+        href="https://twitter.com/intent/tweet?text=How%20I%20cleaned%20a%20ton%20of%20if%20statements%20from%20my%20Angular%20app&url=http://localhost:6060/blog/clean-angular-app-from-ifs"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Twitter" rel="nofollow"><i class="ion ion-logo-twitter"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__facebook"
+        href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:6060/blog/clean-angular-app-from-ifs"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Facebook" rel="nofollow"><i class="ion ion-logo-facebook"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__pinterest"
+        href="http://pinterest.com/pin/create/button/?url=http://localhost:6060/blog/clean-angular-app-from-ifs&amp;media=http://localhost:6060&amp;description=How%20I%20cleaned%20a%20ton%20of%20if%20statements%20from%20my%20Angular%20app"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Pinterest" rel="nofollow"><i class="ion ion-logo-pinterest"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__linkedin"
+        href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:6060/blog/clean-angular-app-from-ifs&title=How%20I%20cleaned%20a%20ton%20of%20if%20statements%20from%20my%20Angular%20app&summary=&source=Ionel%20Lupu"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on LinkedIn" rel="nofollow"><i class="ion ion-logo-linkedin"></i></a>
+    </li>
+  </ul>
+</div>
+
+  </article>
+</div>
+<!-- end post -->
+
+<div class="container">
+  <div class="row">
+    <div class="col col-10 col-d-12 push-d-0 push-1">
+      <div class="post__navigation animate">
+  
+  <a class="post__prev" href="/blog/that-which-does-not-kill-us-makes-us-stronger">
+    <div class="prev__image">
+      <img loading="lazy" src="/images/post-1.jpg" alt="How I cleaned a ton of if statements from my Angular app">
+    </div>
+    <div class="prev__box">
+      <span class="post__nav post__nav__prev">Prev post</span>
+      <h2 class="post__nav__title">That which does not kill us makes us stronger</h2>
+    </div>
+  </a>
+  
+
+  
+  <a class="post__next" href="/blog/typetron-alpha-is-out">
+    <div class="next__box">
+      <span class="post__nav post__nav__next">Next post</span>
+      <h2 class="post__nav__title">Typetron Alpha is out</h2>
+    </div>
+    <div class="next__image">
+      <img loading="lazy" src="" alt="How I cleaned a ton of if statements from my Angular app">
+    </div>
+  </a>
+  
+</div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+<!-- begin related posts -->
+<div class="container">
+  <section class="related-posts is-related animate">
+    <div class="row">
+      <div class="col col-12">
+        <div class="container__inner">
+          <div class="section__info">
+            <div class="section__head">
+              <h2 class="section__title">You may also like</h2>
+              <a class="section__link" href="/blog">
+                
+                
+                  
+                    <a href="/tags#Typescript" class="section__link related-tag">See all<span> Typescript</span> <i class="ion ion-md-arrow-forward"></i></a>
+                  
+                
+                  
+                
+              
+              </a>
+            </div>
+          </div>
+          <div class="row">
+
+          
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/typescript" class="article__tag">Typescript</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/typetron-alpha-is-out">Typetron Alpha is out</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      I've been working on a Node.js framework for building REST APIs lately called [Typetron](https://typetron.org) and I ...
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/L1008018.jpeg" alt="Ionel Lupu">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Ionel Lupu</div>
+                        <span class="article__date"><time datetime="2020-04-23T00:00:00+03:00">23 Apr 2020</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+              
+            
+            
+            
+      
+            
+      
+            
+            
+            
+            
+      
+            
+      
+            
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- end related posts -->
+
+
+
+
+<!--bookshop-live name(newsletter/newsletter.jekyll.html) params(newsletter_title=site.data.newsletter.newsletter_title
+  newsletter_description=site.data.newsletter.newsletter_description
+  newsletter_button=site.data.newsletter.newsletter_button) context() -->
+          <!-- begin subscribe -->
+
+<section class="c-subscribe section">
+	<div class="container">
+		<div class="row">
+			<div class="col col-12">
+
+				<div class="c-subscribe__inner">
+					<div class="c-subscribe__info">
+						<h3 class="c-subscribe__title">Join my mailing list</h3>
+						<div class="c-subscribe__subtitle">
+							<span id="ityped"></span>
+						</div>
+					</div>
+
+					<!-- The OLD form -->
+					<!--					<form class="c-subscribe__form validate" action="//"-->
+					<!--						  method="POST" id="membedded-subscribe-form" name="membedded-subscribe-form" target="_blank" novalidate>-->
+					<!--						<label class="screen-reader-text" for="mce-EMAIL">Email address</label>-->
+					<!--						<input class="c-subscribe__form-email required email" id="mce-EMAIL" type="text" name="EMAIL" placeholder="Your email address">-->
+					<!--						<button class="c-button c-button&#45;&#45;primary c-button&#45;&#45;large" id="membedded-subscribe" type="submit" name="subscribe">Subscribe</button>-->
+					<!--					</form>-->
+
+
+					<script type="text/javascript" src="https://zcv3-zcmp.maillist-manage.eu/js/optin.min.js" onload="setupSF('sf3zd2f2f8b6237e59ed7b57ef6d8ca0b240aa8a4b7ba27f2951cb93b061ad434b08','ZCFORMVIEW',false,'light',false,'0')"></script>
+					<script type="text/javascript">
+						function runOnFormSubmit_sf3zd2f2f8b6237e59ed7b57ef6d8ca0b240aa8a4b7ba27f2951cb93b061ad434b08(th) {
+							/*Before submit, if you want to trigger your event, "include your code here"*/
+						}
+					</script>
+
+					<style>
+						::-webkit-input-placeholder {
+							color: rgb(106, 73, 162)
+						}
+					</style>
+
+
+					<div id="sf3zd2f2f8b6237e59ed7b57ef6d8ca0b240aa8a4b7ba27f2951cb93b061ad434b08" data-type="signupform">
+						<form method="POST" id="zcampaignOptinForm" action="https://zcv3-zcmp.maillist-manage.eu/weboptin.zc" target="_zcSignup" class="c-subscribe__form">
+							<input type="email" placeholder="Email Address" changeitem="SIGNUP_FORM_FIELD" name="CONTACT_EMAIL" id="EMBED_FORM_EMAIL_LABEL" class="c-subscribe__form-email">
+							<input type="button" class="c-button c-button--primary c-button--large" name="SIGNUP_SUBMIT_BUTTON" id="zcWebOptin" value="Subscribe">
+							<input type="hidden" id="fieldBorder" value="">
+							<input type="hidden" id="submitType" name="submitType" value="optinCustomView">
+							<input type="hidden" id="emailReportId" name="emailReportId" value="">
+							<input type="hidden" id="formType" name="formType" value="QuickForm">
+							<input type="hidden" name="zx" id="cmpZuid" value="14ac1d7deb">
+							<input type="hidden" name="zcvers" value="2.0">
+							<input type="hidden" name="oldListIds" id="allCheckedListIds" value="">
+							<input type="hidden" id="mode" name="mode" value="OptinCreateView">
+							<input type="hidden" id="zcld" name="zcld" value="15508c1751e8ed9">
+							<input type="hidden" id="zctd" name="zctd" value="">
+							<input type="hidden" id="document_domain" value="">
+							<input type="hidden" id="zc_Url" value="zcv3-zcmp.maillist-manage.eu">
+							<input type="hidden" id="new_optin_response_in" value="0">
+							<input type="hidden" id="duplicate_optin_response_in" value="0">
+							<input type="hidden" name="zc_trackCode" id="zc_trackCode" value="ZCFORMVIEW">
+							<input type="hidden" id="zc_formIx" name="zc_formIx" value="3zd2f2f8b6237e59ed7b57ef6d8ca0b240aa8a4b7ba27f2951cb93b061ad434b08">
+							<input type="hidden" id="viewFrom" value="URL_ACTION">
+						</form>
+					</div>
+					<input type="hidden" id="signupFormType" value="QuickForm_Vertical">
+
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- end subscribe -->
+
+<script>
+	var itype_text = ['Get inspiration, updates and, cool stuff!']
+</script>
+
+          <!--bookshop-live end-->
+
+
+    <!-- 
+        Bookshop components are accessed using the bookshop tag, 
+        using the same syntax as the standard Jekyll include tag.
+    -->
+    <!--bookshop-live name(page.jekyll.html) params(content_blocks=page.content_blocks page_theme=page.page_theme) context() -->
+          
+          <!--bookshop-live end-->
+
+    <div class="top" title="Top"><i class="ion ion-ios-arrow-up"></i></div>
+
+    <!-- begin footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col col-12">
+
+        <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+          
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://twitter.com/ionelLupu_" target="_blank" rel="noopener" aria-label="twitter icon"><i class="ion ion-logo-twitter"></i></a>
+    </li>
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/IonelLupu" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+          <!--bookshop-live end-->
+
+        <ul class="footer_nav list-reset">
+          
+          <li class="footer_nav__item">
+            <a href="/" class="footer_nav__link">Home</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/about/" class="footer_nav__link">About</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/blog/" class="footer_nav__link">Blog</a>
+          </li>
+          
+        </ul>
+
+        <div class="copyright">
+          <p> 23 &copy; <a href="/">Ionel Lupu</a>. Template by <a href="https://cloudcannon.com/">CloudCannon</a>.</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- end footer -->
+
+
+    <!--
+        load the live component for CloudCannon live previews.
+    -->
+    <script>
+(function(){
+  const bookshopLiveSetup = (CloudCannon) => {
+    CloudCannon.enableEvents();
+
+    const head = document.querySelector('head');
+    const script = document.createElement('script');
+    script.src = `/_cloudcannon/bookshop-live.js`;
+    script.onload = function() {
+      window.bookshopLive = new window.BookshopLive({
+        remoteGlobals: ['/_cloudcannon/bookshop-site-data.json']
+      });
+      const updateBookshopLive = async () => {
+        const frontMatter = await CloudCannon.value();
+        const options = window.bookshopLiveOptions || {};
+        await window.bookshopLive.update({page: frontMatter}, options);
+        CloudCannon?.refreshInterface?.();
+      }
+      document.addEventListener('cloudcannon:update', updateBookshopLive);
+      updateBookshopLive();
+    }
+    head.appendChild(script);
+  }
+
+  document.addEventListener('cloudcannon:load', function (e) {
+    bookshopLiveSetup(e.detail.CloudCannon);
+  });
+})();
+</script>
+
+    <script src="/js/scripts.js"></script>
+    <script src="/js/common.js"></script>
+</body>
+</html>
