@@ -1,0 +1,25 @@
+<!-- begin footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col col-12">
+
+        {% bookshop_include social-link %}
+
+        <ul class="footer_nav list-reset">
+          {% for item in site.data.footer.footer_menu__settings.menu__items %}
+          <li class="footer_nav__item">
+            <a href="{{ item.url | relative_url }}" class="footer_nav__link">{{ item.title }}</a>
+          </li>
+          {% endfor %}
+        </ul>
+
+        <div class="copyright">
+          <p> {{ site.time | date: '%y' }} &copy; <a href="/">Ionel Lupu</a>. Template by <a href="https://cloudcannon.com/">CloudCannon</a>.</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- end footer -->
