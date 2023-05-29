@@ -1,105 +1,93 @@
 title: Ionel Lupu
-email:
-description: >- # this means to ignore newlines until "baseurl:"
-  Ionel Lupu's personal blog about web development
-twitter_username: ionelLupu_
-github_username: IonelLupu
-minimal_mistakes_skin: default
-search: true
-breadcrumbs: true  # disabled by default
 
-# Build settings
-markdown: kramdown
-remote_theme: mmistakes/minimal-mistakes
-# Outputting
-permalink: /:categories/:title/
-paginate: 10 # amount of posts to show
-paginate_path: /page:num/
-timezone: Europe/Bucharest # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+plugins:
+  - jekyll-bookshop
+  - cloudcannon-jekyll-bookshop
+  - jekyll-sitemap
+  - jekyll/tagging
+  - jekyll-pagebreak
+
+# Multiple bookshops can be used on one website,
+# or different production / staging locations.
+bookshop_locations:
+  - ../components
+
+exclude:
+  - postcss.config.js
+  - node_modules
 
 include:
-    - _pages
+  - _cloudcannon
 
-# Exclude from processing.
-# The following items will not be processed, by default. Create a custom list
-# to override the default setting.
-# exclude:
-#   - Gemfile
-#   - Gemfile.lock
-#   - node_modules
-#   - vendor/bundle/
-#   - vendor/cache/
-#   - vendor/gems/
-#   - vendor/ruby/
+# The rest of this array structure will be
+# populated by the bookshop-array-structures plugin.
+_array_structures:
+  content_blocks:
+    style: modal
 
-# Plugins (previously gems:)
-plugins:
-  - jekyll-paginate
-  - jekyll-sitemap
-  - jekyll-gist
-  - jekyll-feed
-  - jemoji
-  - jekyll-include-cache
+collections_dir: 'collections'
 
-author:
-  name: "Ionel Lupu"
-  avatar: "/assets/images/avatar.jpg"
-  bio: "🌎 Full-stack web developer <br/> ⚡ Creator of [Typetron](https://typetron.org) <br/> 💎 Typescript enthusiast."
-  links:
-    -   label: "Typetron"
-        icon: "fas fa-fw fa-link"
-        url: "https://typetron.org"
-    -   label: "Twitter"
-        icon: "fab fa-fw fa-twitter-square"
-        url: "https://twitter.com/ionelLupu_"
-    -   label: "GitHub"
-        icon: "fab fa-fw fa-github"
-        url: "https://github.com/IonelLupu"
-#    - label: "Instagram"
-#      icon: "fab fa-fw fa-instagram"
-#      url: "https://instagram.com/"
+collections:
+  pages:
+    output: true
+    permalink: /:title/
+  projects:
+    output: true
+    permalink: /project/:slug
+  testimonials:
+    output: false
+  posts:
+    output: true
+    permalink: /blog/:slug
 
-footer:
-  links:
-    -   label: "Twitter"
-        icon: "fab fa-fw fa-twitter-square"
-        url: "https://twitter.com/ionelLupu_"
-    -   label: "GitHub"
-        icon: "fab fa-fw fa-github"
-        url: "https://github.com/IonelLupu"
-#    - label: "Instagram"
-#      icon: "fab fa-fw fa-instagram"
-#      url: "https://instagram.com/"
+cloudcannon:
+  collections:
+    pages:
+      _icon: 'wysiwyg'
+    projects:
+      _icon: 'work_outline'
+      _subtext_key: subtitle
+    testimonials:
+      _icon: 'format_quote'
+      _subtext_key: position
+      _enabled_editors:
+        - data
+
+_collection_groups:
+  - heading: Content
+    collections:
+      - pages
+      - projects
+      - testimonials
+  - heading: Blogging
+    collections:
+      - posts
+      - drafts
+  - heading: Settings
+    collections:
+      - data
 
 defaults:
-  # _posts
-  -   scope:
-        path: ""
-        type: posts
-      values:
-        layout: single
-        author_profile: true
-        read_time: true
-      comments: true
-      share: true
-      related: true
-  # _pages
   - scope:
-      path: "_pages"
-      type: pages
+      path: ""
     values:
-        layout: single
-        author_profile: true
+      layout: default
+  - scope:
+      type: pages
+      path: _pages/index.html
+    values:
+      permalink: /
+  - scope:
+      type: projects
+    values:
+      layout: project
+  - scope:
+      type: posts
+    values:
+      layout: post
 
-category_archive:
-    type: liquid
-    path: /categories/
-tag_archive:
-    type: liquid
-    path: /tags/
 
-analytics:
-    provider: "google-gtag"
-    google:
-        tracking_id: "UA-168719203-1"
-        anonymize_ip: false # default
+# Tags
+tag_page_dir: tag
+tag_page_layout: tag_page
+tag_permalink_style: /:title
