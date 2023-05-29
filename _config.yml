@@ -8,7 +8,7 @@ plugins:
   - jekyll-pagebreak
 
 # Multiple bookshops can be used on one website,
-# or different production / staging locations.
+# or different production/staging locations.
 bookshop_locations:
   - ../components
 
