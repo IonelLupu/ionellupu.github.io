@@ -7,7 +7,7 @@ image: /images/posts/ternary-cover.png
 published: true
 ---
 
-The other day I came across a tweet from [@trunarla](https://twitter.com/trunarla) about how can ternary operators can be made more readable:
+The other day I came across a tweet from [@trunarla](https://twitter.com/trunarla){:target="_blank"} about how can ternary operators can be made more readable:
 ![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/ucjelyyfgigmzvab2czi.png)
 
 _Link to the [tweet](https://twitter.com/trunarla/status/1661132581642076160?t=mRg5ukz3PsHW0gCSwTs9Pw&s=19)_
