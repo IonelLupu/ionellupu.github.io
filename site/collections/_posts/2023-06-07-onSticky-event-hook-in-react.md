@@ -1,15 +1,14 @@
 ---
 title: "'onSticky' Event hook in React"
-date: 2023-05-29
 categories:
-  - Refactors
+  - Utility
 tags:
   - react
   - CSS
   - typescript
   - javascript
 image: https://dev-to-uploads.s3.amazonaws.com/uploads/articles/wmtxvmwudbbxict196p8.gif
-published: true
+published: false
 ---
 
 In the previous article we discussed about creating a custom event handler for the "element is sticky" event, which allowed us to do change the style of some elements, giving us this effect:
