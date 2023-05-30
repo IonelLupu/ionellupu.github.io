@@ -76,7 +76,7 @@ function getDayName(locale: string, date: Date) {
     return new Intl.DateTimeFormat(locale, { weekday: 'long' }).format(date)
 }
 
-console.log(getDayName(navigator.language, new Date())) // Monday
+console.log(getDayName(navigator.language, new Date('2023-05-23'))) // Monday
 ```
 
 Much cleaner. I also replaced the `dayNumber` argument with a `Date` instance since in most cases this is what you will be using.
@@ -89,7 +89,7 @@ function getDayName(locale: string, date: Date) {
     return new Intl.DateTimeFormat(locale, { weekday: 'short' }).format(date)
 }
 
-console.log(getDayName(navigator.language, new Date())) // Mon
+console.log(getDayName(navigator.language, new Date('2023-05-23'))) // Mon
 ```
 
 ```ts
@@ -97,7 +97,7 @@ function getDayName(locale: string, date: Date) {
     return new Intl.DateTimeFormat(locale, { weekday: 'narrow' }).format(date)
 }
 
-console.log(getDayName(navigator.language, new Date())) // M
+console.log(getDayName(navigator.language, new Date('2023-05-23'))) // M
 ```
 
 Imagine implementing all of this functionality in your project manually. It's a nightmare.
