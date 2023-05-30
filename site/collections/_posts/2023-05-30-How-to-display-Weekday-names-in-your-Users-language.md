@@ -4,7 +4,7 @@ tags:
   - Refactors
   - utility
 image: /images/posts/ternary-cover.png
-published: false
+published: true
 ---
 
 The other day I came across a tweet from [@trunarla](https://twitter.com/trunarla) about how can ternary operators can be made more readable:

@@ -4,7 +4,7 @@ categories:
   - Typetron
 tags:
   - Typetron
-published: false
+published: true
 image: /images/posts/image.png
 ---
 I've been working on a Node.js framework for building REST APIs lately called [Typetron](https://typetron.org) and I wanted to announce it's alpha release together with its [first tutorial](https://typetron.org/tutorials/blog) where I show you how to build a simple backend for a personal blog. 🔥🔥🔥
