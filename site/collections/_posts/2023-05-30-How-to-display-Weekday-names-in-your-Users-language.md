@@ -3,7 +3,7 @@ title: How to display Weekday names in your User's language
 tags:
   - Refactors
   - utility
-image: {{site.url}}/images/posts/ternary-cover.png
+image: https://ionel-lupu.com/images/posts/ternary-cover.png
 published: true
 ---
 
