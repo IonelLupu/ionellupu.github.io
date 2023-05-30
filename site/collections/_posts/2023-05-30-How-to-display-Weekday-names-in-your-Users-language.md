@@ -22,7 +22,7 @@ If we take a look at the code, we can clearly see we can have an array of weekda
 const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 
 function getDayName(dayNumber: number) {
-	return weekdays[dayNumber] || 'Invalid day number'
+    return weekdays[dayNumber] || 'Invalid day number'
 }
 
 console.log(getDayName(2)) // Tuesday
@@ -37,12 +37,12 @@ My idea is to create an object where the keys are the language codes (called "lo
 
 ```ts
 const weekdays: Record<string, string[]> = {
-	'en-US': ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-	'fr-FR': ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
-	// add more locales as needed...
+    'en-US': ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+    'fr-FR': ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+    // add more locales as needed...
 }
 function getDayName(locale: string, dayNumber: number) {
-	return weekdays[locale][dayNumber] || 'Invalid day number'
+    return weekdays[locale][dayNumber] || 'Invalid day number'
 }
 
 console.log(getDayName('fr-FR', 2)) // Mardi
@@ -54,12 +54,12 @@ Let's not hardcode the locale and get it directly from the user's browser using 
 
 ```ts
 const weekdays: Record<string, string[]> = {
-	'en-US': ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-	'fr-FR': ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
-	// add more locales as needed...
+    'en-US': ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+    'fr-FR': ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+    // add more locales as needed...
 }
 function getDayName(locale: string, dayNumber: number) {
-	return weekdays[locale][dayNumber] || 'Invalid day number'
+    return weekdays[locale][dayNumber] || 'Invalid day number'
 }
 
 console.log(getDayName(navigator.language, 2)) // Tuesday (my browser is in English)
@@ -73,7 +73,7 @@ We can scratch out our entire code and use this instead:
 
 ```ts
 function getDayName(locale: string, date: Date) {
-	return new Intl.DateTimeFormat(locale, { weekday: 'long' }).format(date)
+    return new Intl.DateTimeFormat(locale, { weekday: 'long' }).format(date)
 }
 
 console.log(getDayName(navigator.language, new Date())) // Monday
@@ -86,7 +86,7 @@ We can play with the `weekday` property of the `DateTimeFormat` function and see
 
 ```ts
 function getDayName(locale: string, date: Date) {
-	return new Intl.DateTimeFormat(locale, { weekday: 'short' }).format(date)
+    return new Intl.DateTimeFormat(locale, { weekday: 'short' }).format(date)
 }
 
 console.log(getDayName(navigator.language, new Date())) // Mon
@@ -94,7 +94,7 @@ console.log(getDayName(navigator.language, new Date())) // Mon
 
 ```ts
 function getDayName(locale: string, date: Date) {
-	return new Intl.DateTimeFormat(locale, { weekday: 'narrow' }).format(date)
+    return new Intl.DateTimeFormat(locale, { weekday: 'narrow' }).format(date)
 }
 
 console.log(getDayName(navigator.language, new Date())) // M
