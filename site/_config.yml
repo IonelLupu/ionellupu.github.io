@@ -1,5 +1,5 @@
 title: Ionel Lupu
-
+baseurl: "" # the subpath of your site, e.g. /blog
 plugins:
   - jekyll-bookshop
   - cloudcannon-jekyll-bookshop
