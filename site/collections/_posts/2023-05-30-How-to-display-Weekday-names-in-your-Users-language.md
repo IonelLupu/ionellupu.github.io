@@ -8,7 +8,7 @@ published: true
 ---
 
 The other day I came across a tweet from [@trunarla](https://twitter.com/trunarla){:target="_blank"} about how can ternary operators can be made more readable:
-![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/ucjelyyfgigmzvab2czi.png)
+![readable ternary operators](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/ucjelyyfgigmzvab2czi.png)
 
 _Link to the [tweet](https://twitter.com/trunarla/status/1661132581642076160?t=mRg5ukz3PsHW0gCSwTs9Pw&s=19)_
 
@@ -81,7 +81,7 @@ console.log(getDayName(navigator.language, new Date('2023-05-23'))) // Monday
 
 Much cleaner. I also replaced the `dayNumber` argument with a `Date` instance since in most cases this is what you will be using.
 
-##### Exploring how to display day names
+### Exploring different day names formats
 We can play with the `weekday` property of the `DateTimeFormat` function and see different way to display the weekday:
 
 ```ts
