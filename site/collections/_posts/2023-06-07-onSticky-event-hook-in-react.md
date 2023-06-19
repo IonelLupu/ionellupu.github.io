@@ -339,13 +339,3 @@ Overall, a complex journey which improved more than our knowledge of making stic
 ---
 
 That's it from my side. See you in the next one where I will be building a similar thing in Angular, then Vue.
-
----
-
-Twitter: [Ionel Lupu](https://twitter.com/ionelLupu_)
-
-Check the [website](https://typetron.org)
-Twitter at [@TypetronWeb](https://twitter.com/TypetronWeb)
-Come and leave a question on [Reddit](https://www.reddit.com/r/typetron)
-Join [the Facebook](https://www.facebook.com/Typetron-662589810876633/) group
-Let's talk on [Slack](https://typetron.slack.com)
