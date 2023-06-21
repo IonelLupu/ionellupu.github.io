@@ -6,7 +6,8 @@ tags:
   - CSS
   - typescript
   - javascript
-image: https://dev-to-uploads.s3.amazonaws.com/uploads/articles/wmtxvmwudbbxict196p8.gif
+image: /images/posts/onsticky-handler.gif
+social_image: /images/posts/onsticky-handler-still.jpg
 ---
 
 Have you ever wished to change the CSS properties when an element goes in the "sticky" mode on the page?
