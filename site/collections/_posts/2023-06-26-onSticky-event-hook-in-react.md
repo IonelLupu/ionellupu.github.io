@@ -336,6 +336,7 @@ I believe we learned a lot of things in this article:
 
 Overall, a complex journey which improved our knowledge more than just making sticky elements.
 
----
+[//]: # (---)
 
-That's it from my side. See you in the next one where I will be building a similar thing in Angular, then Vue.
+[//]: # ()
+[//]: # (That's it from my side. See you in the next one where I will be building a similar thing in Angular, then Vue.)

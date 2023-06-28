@@ -185,4 +185,4 @@ function onSticky(selector: string | HTMLElement, callback: (isSticky: boolean) 
 }
 ```
 
-We will explore how to implement a custom hook on React, Angular and Vue in upcoming articles.
+[//]: # (We will explore how to implement a custom hook on React in the upcoming article.)
