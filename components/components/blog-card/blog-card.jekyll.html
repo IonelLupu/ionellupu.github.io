@@ -1,6 +1,6 @@
 {% assign c = "c-blog-card" %}
 <div class="{{c}} col col-4 col-d-6 col-t-12">
-  <div class="{{c}}__inner">
+  <div class="{{c}}__inner" style="{% if post.published == false %} filter: grayscale(100%); opacity:0.6 {% endif %}">
 
     {% if include.post.image %}
     <div class="{{c}}__image-wrap">
