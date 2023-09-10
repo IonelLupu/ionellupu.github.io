@@ -6,6 +6,7 @@ tags:
     - javascript
     - promises
 image: /images/posts/async-await-try-catch.jpg
+published: false
 ---
 
 Is the following code going to crash your program or will it execute without any issues? Take your time to make a guess.
