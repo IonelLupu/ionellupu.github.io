@@ -61,7 +61,7 @@ John is not allowed to park
 car 2 parked
 ```
 ---
-One thing you need to be careful about regarding `try/catch` blocks and promises is to properly use the `await` keyword
+One thing you need to be careful regarding `try/catch` blocks and promises is to properly use the `await` keyword
 depending on where you want to catch the errors.
 In the example above, at this line `return canParkCar(car)`, the `parkCar` function finished its job by just 
 returning a promise. The promise wasn't resolved, so no error was thrown. 
