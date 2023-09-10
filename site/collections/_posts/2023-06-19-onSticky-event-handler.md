@@ -1,4 +1,4 @@
-````---
+---
 title: "'onSticky' Event handler"
 categories:
     - Utility
