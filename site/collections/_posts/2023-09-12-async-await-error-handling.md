@@ -60,17 +60,31 @@ $ node app.js
 John is not allowed to park
 car 2 parked
 ```
+
 ---
 One thing you need to be careful regarding `try/catch` blocks and promises is to properly use the `await` keyword
 depending on where you want to catch the errors.
-In the example above, at this line `return canParkCar(car)`, the `parkCar` function finished its job by just 
-returning a promise. The promise wasn't resolved, so no error was thrown. 
+In the example above, at this line
 
-However, when you use `await` on this line `await parkCar({ owner : 'John', allowed : false })`, you are now "running" the
-promise making the code throw an error in this case. And because there is no `try/catch` block around this `await` statement,
-the program crashes.
+```ts
+return canParkCar(car)
+``` 
+
+the `parkCar` function finished its job by just
+returning a promise. The promise wasn't resolved, so no error was thrown.
+
+However, when you use `await` on this line
+
+```ts
+await parkCar({owner: 'John', allowed: false})
+```
+
+you are now waiting for the promise to resolve and implicitly waiting for any thrown errors. And because there is
+no `try/catch` block around this `await` statement, the program crashes. The error bubbled up until the "root" of the
+program.
 
 The fix? Just await the `canParkCar` call:
+
 ```js
 async function parkCar(car) {
     try {
@@ -82,16 +96,27 @@ async function parkCar(car) {
 }
 ```
 
-Now, the line `return await canParkCar(car)` not only returns a promise, but it also waits for the promise to resolve,
-meaning it will catch any thrown errors. The program now has the expected output without any crashes:
+Now, the line
+
+```ts
+return await canParkCar(car)
+```
+
+not only returns a promise, but it also waits for the promise to resolve. Any thrown errors will be handled there by
+the `try/catch` block.
+
+The program now has the expected output without any crashes:
+
 ```bash
 $ node app.js
 
 John is not allowed to park
 car 2 parked
 ```
+
 ---
-The key takeaway? Be careful when you want to return a promise, or you want to actually resolve it depending on your `try/catch` blocks.
+The key takeaway? Be careful when you want to return a promise, or you want to actually resolve it depending on
+your `try/catch` blocks.
 
 That's it for this quick tip.
 
