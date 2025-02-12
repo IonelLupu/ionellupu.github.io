@@ -5,7 +5,7 @@ categories:
 tags:
     - GeoPulse
     - IP Geolocation
-image: /images/posts/geopulse.png
+image: /images/posts/geopulse.jpg
 ---
 
 Do you want to show the user's country flag, currency, language, or auto-select their country's phone prefix in the checkout form?
