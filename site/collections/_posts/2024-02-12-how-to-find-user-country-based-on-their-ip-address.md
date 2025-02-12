@@ -121,7 +121,7 @@ You can customize the baseCurrency if you want like this:
 http://localhost:8090/ip/8.8.8.8?baseCurrency=EUR
 ```
 
-The `baseCurrency` parameter lets you change the `exchangeRateBaseCurrency`. For example, `baseCurrency=EUR` will return exchange rates between the user's country currency (USD) and EUR.
+The `baseCurrency` parameter lets you change the `exchangeRateBaseCurrency`. For example, `baseCurrency=EUR` will return exchange rates between the user's country currency (USD in this case) and EUR.
 This allows you to dynamically adjust prices based on the user’s location, converting from EUR (or any currency of your choice) to users' currency (USD in this case). 
 
 
